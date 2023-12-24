@@ -6,7 +6,7 @@ defmodule HelloAsh.Support.Ticket do
     defaults [:create, :read, :update, :destroy]
 
     create :open do
-      accept [:subject]
+      accept [:subject, :representative_id]
     end
 
     create :open_with_status do
@@ -46,6 +46,8 @@ defmodule HelloAsh.Support.Ticket do
   end
 
   relationships do
-    belongs_to :representative, HelloAsh.Support.Representative
+    belongs_to :representative, HelloAsh.Support.Representative do
+      attribute_writable? true
+    end
   end
 end
