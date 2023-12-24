@@ -1,5 +1,6 @@
 defmodule HelloAsh.Support.Ticket do
-  use Ash.Resource
+  use Ash.Resource,
+    data_layer: Ash.DataLayer.Ets
 
   actions do
     defaults [:create, :read, :update, :destroy]
