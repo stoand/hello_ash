@@ -11,14 +11,20 @@ defmodule HelloAshTest do
       |> Ash.Changeset.for_create(:open, %{subject: "not working"})
       |> HelloAsh.Support.create!()
 
-    # ticket |> IO.inspect()
-
     updated_ticket =
       ticket
       |> Ash.Changeset.for_update(:update, %{subject: "working"})
       |> HelloAsh.Support.update!()
 
-    # updated_ticket |> IO.inspect()
+    representative =
+      HelloAsh.Support.Representative
+      |> Ash.Changeset.for_create(:create, %{name: "Bill"})
+      |> HelloAsh.Support.create!()
+
+    updated_ticket =
+      ticket
+      |> Ash.Changeset.for_update(:assign, %{representative_id: representative.id})
+      |> HelloAsh.Support.update!()
 
     HelloAsh.Support.Ticket
     |> Ash.Query.filter(status == :open)

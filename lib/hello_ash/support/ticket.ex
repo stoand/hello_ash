@@ -19,6 +19,16 @@ defmodule HelloAsh.Support.Ticket do
 
       change set_attribute(:status, :closed)
     end
+
+    update :assign do
+      reject :all
+
+      argument :representative_id, :uuid do
+        allow_nil? false
+      end
+
+      change manage_relationship(:representative_id, :representative, type: :append_and_remove)
+    end
   end
 
   attributes do
@@ -33,5 +43,9 @@ defmodule HelloAsh.Support.Ticket do
       default :open
       allow_nil? false
     end
+  end
+
+  relationships do
+    belongs_to :representative, HelloAsh.Support.Representative
   end
 end
