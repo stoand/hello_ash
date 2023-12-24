@@ -22,7 +22,8 @@ defmodule HelloAsh.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      { :ash, "~> 2.17.17" }
+      {:ash, "~> 2.17.17"},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
   end
 end
